@@ -1,0 +1,38 @@
+\usepackage{color}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+\definecolor{green}{rgb}{0.0,0.6,0.0}
+\definecolor{maroon}{rgb}{0.5,0.0,0.0}
+\definecolor{darkgreen}{rgb}{0.0,0.5,0.0}
+
+\lstset{
+	numbers=left,
+	numberstyle=\footnotesize,
+	numbersep=1em,
+	xleftmargin=1em,
+	framextopmargin=2em,
+	framexbottommargin=2em,
+	showspaces=false,
+	showtabs=false,
+	showstringspaces=false,
+	tabsize=4,
+	basicstyle=\ttfamily\small\setstretch{1},
+	columns=fullflexible,
+	showstringspaces=false,
+	commentstyle=\color{gray}\upshape,
+	breaklines=true,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
+    frame=l
+}
+
+\lstdefinelanguage{XML}
+{
+	morestring=[s]{"}{"},
+	morecomment=[s]{<!--}{-->},
+	commentstyle=\color{darkgreen},
+	moredelim=[s][\color{black}]{>}{<},
+	moredelim=[s][\color{red}]{\ }{=},
+	stringstyle=\color{blue},
+	identifierstyle=\color{maroon}
+}

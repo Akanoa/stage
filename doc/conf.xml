@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<root>
+    <configurations><configuration type="redirector">
+            <sockets>
+                <socket type="cmd" buffer-size="10">
+                    <host>localhost</host>
+                    <port>9002</port>
+                </socket>
+            </sockets>
+            <opts>
+                <host>store.cyanide-studio.com</host>
+                <port>80</port>
+                <default-affiliate>99</default-affiliate>
+                <nb-url-path-terms>1</nb-url-path-terms>
+            </opts>
+        </configuration>
+        <configuration type="insertor">
+            <sockets>
+                <socket type="datas" buffer-size="1024">
+                    <host>localhost</host>
+                    <port>8999</port>
+                    <headerSize>8</headerSize>
+                </socket>
+                <socket type="cmd" buffer-size="50">
+                    <host>localhost</host>
+                    <port>9000</port>
+                </socket>
+            </sockets>
+            <smtp_opts>
+                <user>yguern@cyanide-studio.com</user>
+                <password>eaqQCheN</password>
+                <server>mail.cyanide-studio.com</server>
+                <port>25</port>
+                <mailto>yguern@cyanide-studio.com</mailto>
+            </smtp_opts>
+            <db_opts>
+                <host>sql.cyanide-studio.com</host>
+                <port>3306</port>
+                <user>redirector_user</user>
+                <passwd>Yuqf0m:c1NovL6y/</passwd>
+                <db>redirector</db>
+                <table>datas</table>
+            </db_opts>
+        </configuration>
+    </configurations>
+    
+    <projects default-redirection="http://www.cyanide-studio.com">
+        <project name="AarklashLegacy" default-redirection="http://cyanide.gamesplanet.com/shop/aarklash-legacy">
+        </project>
+        <project name="dungeonbowl" default-redirection="http://cyanide.gamesplanet.com/shop/dungeon-bowl">
+        </project>
+        <project name="pcm" default-redirection="http://store.cyanide-studio.com/pcm14" disable="1">
+        </project>
+        <project name="pcm12" default-redirection="http://cyanide.gamesplanet.com/shop/pro-cycling-manager-tour-de-france-2012-cyan">
+        </project>
+        <project name="pcm13" default-redirection="http://cyanide.gamesplanet.com/shop/pro-cycling-manager-tour-de-france-2013-cyan">
+        </project>
+        <project name="pcm14" default-redirection="http://smarturl.it/pcm14-cyan">
+            <redirections>
+                <redirection lang="en_US"><![CDATA[http://affilbasketus.nexway.com/qte.html?REF=778471&affil=29333&typnews=]]></redirection>
+                <redirection lang="en_GB"><![CDATA[http://affilbasketuk.nexway.com/qte.html?REF=778459&affil=29334&typnews=]]></redirection>
+                <redirection lang=""><![CDATA[http://affilbasketeu.nexway.com/qte.html?REF=778459&affil=29332&Langue=en_GB&typnews=]]></redirection>
+                <redirection lang="fr_FR"><![CDATA[http://affilbasketeu.nexway.com/qte.html?REF=778461&affil=29332&Langue=fr_FR&typnews=]]></redirection>
+                <redirection lang="de_DE"><![CDATA[http://affilbasketeu.nexway.com/qte.html?REF=778463&affil=29332&Langue=de_DE&typnews=]]></redirection>
+                <redirection lang="es_ES"><![CDATA[http://affilbasketeu.nexway.com/qte.html?REF=778468&affil=29332&Langue=es_ES&typnews=]]></redirection>
+                <redirection lang="nl_NL"><![CDATA[http://affilbasketeu.nexway.com/qte.html?REF=778464&affil=29332&Langue=nl_NL&typnews=]]></redirection>
+                <redirection lang="it_IT"><![CDATA[http://affilbasketeu.nexway.com/qte.html?REF=778466&affil=29332&Langue=it_IT&typnews=]]></redirection>
+            </redirections>
+        </project>
+    </projects>
+</root>

@@ -1,0 +1,65 @@
+\documentclass[a4paper,11pt,final]{article}
+% Pour une impression recto verso, utilisez plutôt ce documentclass :
+%\documentclass[a4paper,11pt,twoside,final]{article}
+
+\usepackage[english,francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage[french]{varioref}
+\usepackage{geometry}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{listingsutf8}
+\usepackage{color}
+\usepackage{setspace}
+\usepackage{minted}
+
+\newgeometry{margin=2cm}
+\newcommand{\reporttitle}{Conception de scripts d'administration IT}     % Titre
+\newcommand{\reportauthor}{Yannick \textsc{Guern}} % Auteur
+\newcommand{\reportsubject}{Stage de 4ème année} % Sujet
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\setlength{\parskip}{1ex} % Espace entre les paragraphes
+
+\hypersetup{
+    pdftitle={\reporttitle},%
+    pdfauthor={\reportauthor},%
+    pdfsubject={\reportsubject},%
+    pdfkeywords={rapport} {vos} {mots} {clés}
+}
+
+\include{includes/python_highlight}
+\include{includes/xml_highlight}
+
+
+\renewcommand{\thesection}{}
+
+\begin{document}
+  \include{includes/title}
+  \cleardoublepage % Dans le cas du recto verso, ajoute une page blanche si besoin
+  \tableofcontents % Table des matières
+  \sloppy          % Justification moins stricte : des mots ne dépasseront pas des paragraphes
+  \cleardoublepage
+  \include{includes/remerciements}
+  \cleardoublepage
+  \include{includes/intro}
+  \cleardoublepage
+  \include{includes/manager}
+  \cleardoublepage
+  \include{includes/mail}
+  \cleardoublepage
+  \include{includes/tracking}
+  \cleardoublepage
+  \include{includes/backup}
+%  \include{partie1}
+%  \cleardoublepage
+%  \include{partie2}
+%  \cleardoublepage
+  \include{includes/concl}
+  \cleardoublepage
+  \include{includes/references}
+\end{document}

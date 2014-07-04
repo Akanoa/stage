@@ -1,0 +1,83 @@
+\part*{Mailing}
+
+Cette a été réalisé dans l'optique de rajouter des fonctionnalité à un script de manipulation de mailing-list.
+
+Ses principales fonctionnalité sont de permettre à un utilisateur de pouvoir s'inscrire ou se désinscrire d'une liste de diffusion. Mais aussi de gérer ces listes de diffusion.
+
+\section*{Structure de l'application}
+
+Celle ci est formée d'un script écrit en python, ainsi que de trois tables MySQL contenant les informations sur les utilisateurs ainsi que sur les liste de diffusion et une table de relation entre les deux.
+
+Voici la structure de la table contenant les mailing-list:
+
+\begin{itemize}
+	\item \textbf{id} : identifiant unique de la mailing-list
+	\item \textbf{name} : nom de la mailing list, celui-ci sera utilisé comme adresse mail de la liste, exemple si "name" est "cyanide\_ml" alors l'adresse de la mailing-list sera "cyanide\_ml@cyanide-studio.com"
+	\item \textbf{hidden} : indique si la liste est visible, en effet lors d'un abonnement ou désabonnement un mail d'informations signale, non seulement les mailing-list auquel l'utilisateur est abonné mais aussi la liste de toutes les mailing-list visibles existantes. Cette variable permet de cacher cette liste si sa valeur est de 1.
+	\item \textbf{private} si mis à 1, cela interdit les utilisateur de pouvoir s'abonner.
+	\item \textbf{public\_can\_send} : indique si les utilisateurs extérieurs à cyanide ont le droit ou non de poster sur cette liste
+	\item \textbf{public\_can\_subscribe} : permet ou non aux utilisateurs externes à l'entreprise de pouvoir s'abonner
+\end{itemize}
+
+Et voilà celle concerant à proprement par les des utilisateurs symbolisés par leur mailbox;
+
+\begin{itemize}
+	\item \textbf{username}: nom de l'ulisateur et de sa boîte mail par la même occasion. Il permet aussi d'identifier l'utilisateur afin de lui transmettre un mail.
+	\item \textbf{password}: mot de pass hashé de l'utilisateur
+	\item \textbf{name}: nom et prénom de l'utilisateur.
+	\item \textbf{active} : active ou désactive une mailbox, si elle est désactivée elle peut ni envoyer, ni recevoir de message.
+	\item \textbf{domain} permet de spécifier le domaine d'appartenance de la mailbox, en effet cyanide possède une filliale au Quebec, il ne faut donc pas mélanger les différents comptes.
+	\item \textbf{uid} identifaints unique de la boîte mail, en le couplant avec le domain on est capable de créer un couple unique qui permet d'identifier singulièrement l'utilisateur.
+	\item \textbf{ml\_admin} donne à cette boîte mail la possibilité de poster dans des listes de diffusions même si l'utilisateur n'a pas souscrit d'abonnement à la liste préalablement.
+\end{itemize}
+
+Il existe bien entendu une table de pivot réalisant la relation Many-To-Many entre les boîtes mail et les listes de diffusion. En effet un utilisateur peut s'abonner à plusieurs mailing-list et chaque mailing-list possède plusieurs mailboxes de destinations.
+
+\begin{itemize}
+	\item \textbf{id} identifiant unique de la relation
+	\item \textbf{mailing\_list\_id} identifiant de la mailing-list
+	\item \textbf{uid} identifiant de l'utilisateur
+\end{itemize}
+
+\section*{Fonctionnement en abonnement/désabomment}
+
+L'opération d'abonnement se réalise en envoyant un mail sans à l'adresse subscription@cyanide-studio.com, en précisant dans le corps du message les mailing-lists auxquelles on désirent souscrire séparées par des virgules.
+
+Une relation est alors rajouté dans la table de pivot Many-To-Many.
+
+De la même façon la désinscription est réalisé en adressant un mail sans sujet à l'adresse unsubscribe@cyanide-studio.com  en indiquant les listes de diffusion auxquelles  ont veut se désinscrire, séparées par des virgules.
+
+La relation est alors supprimé de la table de pivot.
+
+Un mail est ensuite envoyé pour récapitulé les abonnements de l'utilisateur, ainsi que les autres possibles souscriptions.
+
+\section*{Envoie de mails sur les listes de diffusion}
+
+\subsection*{Vérifier l'autorisation d'un utilisateur}
+
+Un mail n'est considéré comme acceptable si et seulement si celui-ci a été signé et vérifié par un antivirus. Un entête est alors rajouté au head du message, cet header est de la forme:
+
+\begin{lstlisting}
+(Authenticated sender: user@cyanide-studio.com) by mail.cyanide-studio.com (Postfix) with ESMTP id XXXXXXXXXXXX
+\end{lstlisting}
+	
+Si le script ne détecte pas la présence de cette signature alors le mail est considéré comme frauduleux et le script s'arrête sans le transmettre à la liste de diffusion.
+
+\subsection*{Autorisation de poster dans cette liste}
+Avant de laisser l'utilisateur envoyer un message dans la liste de diffusion on vérifie qu'il est bien habilité à le faire, pour cela on vérifie si tout le monde est habilité à le faire.
+
+Ou alors l'utilisateur est un administrateur et aucun test n'est réalisé.
+
+\subsection*{Récupération des différents membres de la liste de diffusion}
+
+Pour cela on utilise la table de relation pivot entre les mailboxes et les mailing-lists et on obtient le les adresses des différents utilisateurs concernés par l'envoie grâce à un LEFT JOIN sur la table des mailbox
+
+\subsection*{Purification du sujet du mail}
+
+En effet à chaque fois qu'un mail est répondu ou transféré une chaîne de caractère est rajouté ce qui peut donner de très long sujet peu lisible et compréhensible pouvant ressembler à:
+
+\fbox{[ml] FWD: [ml] Re: [ml] Re: [ml] Re: [ml] Sujet} devenant \fbox{[ml] Sujet}
+
+Cette transformation est possible à réaliser car à chaque passage par le script le nom de la liste de diffusion est rajouté entre crochet avant le sujet, il est donc possible de récupérer le dernier groupe de caractères entre crochets et de couper le sujet un caractère après la dernière occurrence de la mailing-list.
+
+La seule contrainte est de ne pas pouvoir ajouter "[\textit{nom de la liste}]" dans le sujet.

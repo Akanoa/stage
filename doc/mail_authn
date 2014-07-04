@@ -1,0 +1,38 @@
+Return-Path: <fun@cyanide-studio.com>
+Delivered-To: fun@cyanide-studio.com
+Received: from amavis.cyanide-studio.com (unknown [10.1.5.72])
+	by mail.cyanide-studio.com (Postfix) with ESMTP id 1C8D017BF4E4
+	for <bsemene@cyanide-studio.com>; Thu, 12 Sep 2013 10:15:01 +0200 (CEST)
+Authentication-Results: amavis.cyanide-studio.com (amavisd-new);
+	dkim=pass (1024-bit key) reason="pass (just generated, assumed good)"
+	header.d=cyanide-studio.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+	cyanide-studio.com; h=content-transfer-encoding:content-type
+	:content-type:subject:subject:mime-version:user-agent:from:from
+	:date:date:message-id:received:received; s=mail; t=1378973736;
+	 x=1380788137; bh=Kvi7A/xiYh4jBUP7CRwk05z7SVJpfGNR9/gNRNUKrCw=; b=
+	X7/pLRANgNQnXzrizvTMZkBvlQpIHxsPNIM8XAIKdhtvCH+y+4OrIMBBdRHbYo2y
+	4EE8ihWdNoBO2yzyLv+I6RPwZz9f/wsn+1Aomb1HEczTGtcjq/ScTRB0xZO3L3av
+	G5N7sXfystblMIAiyK/eiWU7YkTCKNWUHicyRd3OF5Y=
+X-Virus-Scanned: amavisd-new at cyanide-studio.com
+Received: from mail.cyanide-studio.com ([10.1.8.3])
+	by amavis.cyanide-studio.com (amavis.cyanide-studio.com [10.1.5.72]) (amavisd-new, port 10024)
+	with ESMTP id a_K2wuKM9_zr for <bsemene@cyanide-studio.com>;
+	Thu, 12 Sep 2013 10:15:36 +0200 (CEST)
+Received: from [10.1.8.96] (unknown [10.1.8.96])
+	(using TLSv1 with cipher DHE-RSA-CAMELLIA256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: bsemene@cyanide-studio.com)
+	by mail.cyanide-studio.com (Postfix) with ESMTP id A52E517BF4C3
+	for <fun@cyanide-studio.com>; Thu, 12 Sep 2013 10:14:59 +0200 (CEST)
+Message-ID: <52317828.2090901@cyanide-studio.com>
+From: Bastien Semene <bsemene@cyanide-studio.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:17.0) Gecko/20130801 Thunderbird/17.0.8
+MIME-Version: 1.0
+To: fun@cyanide-studio.com
+Subject: sujet sujet sujet sujet
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+
+texte texte texte texte texte texte texte texte texte texte texte texte 
+texte texte texte texte texte texte texte texte texte texte

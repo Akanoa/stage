@@ -1,0 +1,299 @@
+\part*{CyaBackup}
+
+\section*{Présentation}
+CyaBackup est système de journalisation de fichiers, permettant la sauvegarde à intervalles régulier de données.
+En outre il est aussi capable de générer des backups sur des systèmes clefs comme les annuaires LDAP ou les base de données MySQL.
+
+
+\section*{Spécification techniques}
+L'intégralité de l'application est réalisée en python ou en utilisant exclusivement les composants de la librairie standard.
+
+La configuration de la journalisation se fait au moyen d'un fichier de configuration au format .ini tel que définit ici http://en.wikipedia.org/wiki/INI\_file à l'exception du symbole de commentaire qui devient \#.
+
+L'utilitaire est lancé en ligne de commande.
+
+\subsection*{Ligne de commande}
+
+\subsubsection*{fichier de configuration}
+	
+Un fichier de configuration peut-être spécifié au moyen du paramètre -config FILE
+
+Si aucun fichier de configuration n'est spécifié, le fichier Backup.ini du répertoire d'exécution du script sera utilisé en tant que fichier de configuration, si celui-ci n'existe pas une erreur est levée.
+Si un fichier de configuration est spécifié il sera utilisé.
+
+Si le fichier spécifié contient une incohérence, le script s'arrête et une erreur est levée,
+	
+\subsubsection*{Debug}	
+	L'utilisateur peut demander plus d'information au moyen du paramètre -v ou -vv
+
+\subsection*{Abstraction de la destination du backup}
+
+Le script permet de spécifier un dossier de destination qui est soit sur un système de fichier local ou monté en lecteur réseau soit sur un serveur distant en passant par le protocole FTP,
+L'abstraction est réalisée grâce à la librairie AbstractFS.
+
+\newpage
+
+\section*{Le fichier de configuration}
+
+Comme dit plus haut, un fichier de configuration incorrect entraîne l'arrêt du script, il faut donc respecter la syntaxe des .INI, mais pas seulement:
+
+\begin{itemize}
+\item[$\bullet$] Le fichier doit contenir obligatoirement une section [general], celle-ci doit elle même être renseigné sur les champs \textbf{email} et \textbf{tmpdir}. 
+\begin{itemize}
+\item Le champs \textbf{email} est pour l'instant inutilisé, mais il pourra être couplé à un système de mailing pouvant avertir l'utilisateur d'une erreur de journalisation.
+\item Le champs \textbf{tmpdir} est le répertoire par défaut de travail du script. 
+\end{itemize}
+\end{itemize}
+
+La section [general] possède 3 sous-sections:
+\begin{itemize}
+\item[$\bullet$] [[MysSQL]]: permet de spécifier les options par défaut de journalisation de BDD, plusieurs champs peuvent/doivent être remplis:
+\begin{itemize}
+\item \textbf{mysqldumppath} (obligatoire) : correspond au chemin absolu de l'exécutable mysqldump sur le pc
+\item \textbf{tmpdir} : argument facultatif permettant de spécifier un répertoire de travail différent pour la journalisation de BDD, peut-être pratique pour les dump volumineux.
+\item \textbf{skiplist} : spécifie les tables d'une BDD qui ne seront pas journalisées
+\item \textbf{dst} : spécifie le répertoire destination des dumps, les chemins de destination seront développés dans une section qui leur est propre
+\item \textbf{version} (obligatoire): indique la version de l'utilitaire mysql
+\item \textbf{login-path} : permet de spécifier un login-path pour les version supérieure à  la 5.6, en effet il est déprécié d'envoyer le mot de passe en clair durant une transaction MySQL depuis la version 5.6.
+\end{itemize}
+\item[$\bullet$] [[Ldap]]: permet de spécifier les options par défaut de journalisation des annuaires Ldap
+\begin{itemize}
+\item \textbf{tmpdir} :  argument facultatif permettant de spécifier un répertoire de travail différent pour la journalisation d'annuaires Ldap
+\item \textbf{dst} : spécifie le répertoire destination des dumps, la configuration des chemins de destination sera développée dans une autre section
+\end{itemize} 
+\item[$\bullet$][[File]] : permet de spécifier les options par défaut de journalisation des annuaires Ldap
+\begin{itemize}
+\item \textbf{tmpdir} :  argument facultatif permettant de spécifier un répertoire de travail différent pour la journalisation de fichier et répertoires
+\item \textbf{dst} : spécifie le répertoire destination des dumps
+\end{itemize}
+\end{itemize}
+
+\vspace{2em}
+Les sections suivantes contiennent diverses option qui écraseront les données de la section générale si les noms de champs coïncident:
+
+La section \textbf{[MySQL]} permet de lister les différentes BDD et de parametrer la journalistion pour chacune d'elles.
+
+Chaque sous section est un label qui n'a aucune incidence sur la sortie mais permet seulement à l'utilisateur de s'y retrouver dans les différentes BDD qu'il souhaite journaliser, ainsi qu'au programme pour les sépararer les unes des autres.
+\begin{itemize}
+\item \textbf{src} (obligatoire) : spécifie le serveur à journaliser, la source est définie en tant qu'une URL et doit donc respecter le format mysql://user:pass@host:port/?db=db1,db2, une URL minimale étant mysql://user:pass@host.
+\item \textbf{dbList} : indique quelle bdd du serveur doivent être journalisées, si le paramètre db de l'url src est spécifié, celui-ci tient lieu de dbList et le présent paramètre devient caduque.
+\item \textbf{skipdefaultlist} : si ce paramètre est à true, la skiplist de la section [general] sera remplacé par la skiplist de la présente sous-section
+\item \textbf{skiplist} : permet d'indiquer les bdd qui ne doivent pas subir de journalisation
+\item \textbf{dst} : indique le répertoire de destination de cette journalisation
+\item 	On peut aussi indiquer 2 sous-sous-section \textbf{[[[archive]]]} et \textbf{[[[rotation]]]}, mais leur utilitée sera développé dans une partie qu'il leur est consacrée.
+\end{itemize}
+
+\newpage
+
+La section \textbf{[Ldap]} permet de lister les différents annuaires Ldap et de parametrer la journalistion pour chacune d'eux.
+
+Chaque sous section est un label qui n'a aucune incidence sur la sortie mais permet seulement à l'utilisateur de s'y retrouver dans les différentes annuaires qu'il souhaite journaliser, ainsi qu'au programme pour les sépararer les unes des autres.
+
+\begin{itemize}
+\item \textbf{src} (obligatoire) : spécifie le serveur à journaliser, la source est définie en tant qu'une URL et doit donc respecter le format  d'une URL minimale étant ldap://host.
+\item  \textbf{dst}  : indique le répertoire de destination de cette journalisation.
+\item \textbf{binddn} (obligatoire) : spécifie l'utilisateur ldap.
+\item \textbf{passwd} (obligatoire): spécifie le mot de passe ldap
+\item \textbf{basedn} (obligatoire) : indique le noeud de recherche racine
+\item De la même façon que pour la section \textbf{[MySQL]}, il est possible de spécifier les sous-sous-section \textbf{[[[[archive]]]] }et \textbf{[[[rotation]]]}
+\end{itemize}
+
+La section \textbf{[File]} permet de lister les différents répertoires et fichiers voulant être journalisées et d'en spécifier les paramètres.
+
+Chaque sous section est un label qui n'a aucune incidence sur le code mais permet seulement à l'utilisateur de s'y retrouver dans les différentes annuaires qu'il souhaite journaliser, ainsi qu'au programme pour les séparer les unes des autres.
+
+\begin{itemize}
+\item \textbf{src} (obligatoire) : spécifie le serveur à journaliser, la source est définie en tant qu'une URL  
+\item \textbf{dst} : indique le répertoire de destination de cette journalisation
+\item \textbf{tmpdir} : spécifie le répertoire de travail
+\item Tout comme la section \textbf{[MySQL]} et \textbf{[LDAP]}, on peut aussi indiquer 2 sous-sous-section \textbf{[[[archive]]]} et \textbf{[[[rotation]]]}
+\end{itemize}
+
+
+Ci dessous un exemple de fichier de configuration valide
+
+\begin{minted}[linenos=true]{ini}
+#Always use / instead of \ for paths on Windows or it can escape characters.
+# \\ can be used to escape itself, but then \\ must be written \\\\ which can become painfull
+
+[general]
+  email  = yguern@cyanide-studio.com
+  tmpdir = C:/tmp
+
+  [[MySQL]]
+  
+    #this the path to the mysqldump executable
+    mysqldumppath = C:/Program Files/MySQL/MySQL Server 5.6/bin/mysqldump.exe
+  
+    #temp dir, cleared after running
+    tmpdir        = s:/tmp
+  
+    #Any subsection specific option put here will be interpreted as default:
+    #You should always skip 'performance_schema' is this db is not dump-able
+    # list  => merged (can be replaced)
+    # other => replaced
+    skiplist      = information_schema, performance_schema, mysql
+  
+    #destination folder for backup. Will be created if non-existant, avoid root partition
+    dst           = C:/dst
+  
+    #pattern either x.y or xx i.e. that 5.2 or 52
+    version       = 5.6
+  
+    #local-path config, if none value is specified, local-path sets to "local"
+    login-path    = bsd
+  
+  [[Ldap]]
+    tmpdir = s:/tmp
+
+  [[File]]
+    tmpdir = s:/tmp
+
+[MySQL]
+
+  [[postfix]]
+    #If query db is specified (i.e mysql://domain.com/?db=db1,db2)
+    #Only databases listed in this query will be backuped and skipList will be ignored
+    src   = mysql://root:test@host:3306
+
+    dblist  = db1
+
+    skipdefaultlist = true
+
+    dst   = s:/bkup
+
+    skiplist  = 
+
+    [[[archive]]]
+      compress  = tar
+
+    [[[rotation]]]
+      monthsoff   = 12
+
+      max_files   = 3
+
+[Ldap]
+  [[IT]]
+    dst   = ftp://user@ftp.host.dst
+
+    src   = ldap://ldap.host.somewhere
+
+    #put binddn and basedn between "" because of , character
+    binddn  = "cn=User,dc=cyanide-studio,dc=com"
+
+    passwd  = ******
+
+    basedn  = "dc=cyanide-studio,dc=com"
+  
+[File]
+  [[test]]
+    dst  = s:/dst
+
+    src  = s:/src
+
+    tmpdir   = s:/tmp
+
+    [[[archive]]]
+      compress    = gz
+
+    [[[rotation]]]
+      rotate      = true
+
+      daysoff     = 3
+
+      weeksoff    = 2
+
+      dayofweek   = 7
+
+      monthsoff   = 5
+
+      max_files   = 0
+
+      min_files   = 0	
+\end{minted}
+
+\subsection*{Les urls}
+Les urls permettent de spécifier des répertoire d'entrées-sorties, facilement en utilisant le système de schéma qui indique sur quel système de fichier la ressource se trouve, par example une url débutant par ftp://, indique que la ressource est située sur un serveur FTP à l'inverse une ressource dans un système de fichier local débuttera par file://.
+Remarque: si aucun schéma n'est défini, le système considérera la ressource comme locale.
+
+
+\subsection*{La sous-sous-section [[[archive]]]}
+Permet d'indiquer que l'on souhaite archiver les backups
+compress : permet de parametrer le mode compression de l'archive
+Pour l'instant les seuls modes disponibles, sont:
+\begin{itemize}
+\item tar : pas de compression
+\item bz2
+\item gz 
+\end{itemize}
+
+\newpage
+
+\subsection*{La sous-sous-section [[[rotation]]]}
+Si celle ci est présente, permet d'activer le système de rotation des backups
+Elles présente de nombreuses options
+\begin{itemize}
+\item \textbf{rotate} : si mis a true active la rotation
+\item \textbf{max-files} : limites le nombres de fichiers généré
+\item \textbf{min-files} : cap le minimum de backup présent, ceci est une sécurité
+\end{itemize}
+Remarque: si rotate est à false: le système ne gardera que les max-files plus récents fichiers
+
+Maintenant dans le cas d'une rotation activée:
+\begin{itemize}
+\item \textbf{daysoff} : spécifie le nombre maximale de jours qui seront conservés.
+\item \textbf{weeksoff}: nombre de semaine conservées
+\item \textbf{dayofweek}: jour de la semaine où la journalisation se lance
+\item \textbf{monthoff}: nombre de mois conservés
+\item \textbf{dayofmonth}:jour du mois où la journalistion est effectuée	
+\end{itemize}
+
+Remarques:
+	Si les paramètres de rotation sont en contradiction avec les paramètres max-files et min-files,
+la rotation sera affectée par ces deux paramètres. 
+
+
+\section*{Déroulement du script}
+\subsection*{Script de ligne de commande}
+Vérifie l'existence du fichier de configuration et le transforme en dictionnaire avant de le donner en paramètres à la classe Backup.
+\subsection*{Class Backup}
+Le point d'entré du script se fait par la classe Backup, son rôle est de s'assurer que la syntaxe du fichier de configuration est respectée et que les champs de configuration minimal sont bien remplis, si ce n'est pas le cas celui-ci lève une erreur et le script s'arrête.
+Dans le cas où la fichier de configuration est valide, lorsqu'il rencontre une section qui n'est pas la section [general], il tente d'importer le module class[non de la section].py, si celui-ci n'existe pas une erreur est levée.
+Si le module est importé avec succès, le script tente d'instancier la classe Bkup commune à tous les classes nom de section en utilisant comme paramètre de constructeurs les argument de la sous-section  non de la section de la section general , si l'instanciation échoue une erreur est levé et le script s'arrête.
+Si la classe est correctement instancée, le script lance la fonction launch avec en paramètre les arguments contenus dans la sous-section du label de backup.
+
+\subsection*{Les classe de Backup}
+
+\subsubsection*{Classe Bkup de Mysql}
+La classe vérifie tout d'abord la validité des options transmis en paramètre de la fonction launch, si ceci sont invalide une erreur est ajouté à la liste des erreurs et on quitte la fonction.
+Si les options sont valides, la classe tente de se connecter au serveur Mysql, si cela échoue une erreur est renvoyé, si la connexion réussis l'utilitaire mysqldump effectue le dump de toutes les bases de spécifiées.
+Les dump sont ensuite archivés si besoin, les dump sont ensuite déplacés dans le répertoire de destination, puis, si la rotation est demandée, les fichiers indésirables sont supprimés.
+
+\newpage
+
+\subsubsection*{Classe Bkup de Ldap}
+La classe vérifie tout d'abord la validité des options transmis en paramètre de la fonction launch, si ceci sont invalide une erreur est ajouté à la liste des erreurs et on quitte la fonction.
+Si les options sont valides, la classe tente de se connecter au serveur Ldap, si celà échoue une erreur est renvoyé, si la connexion réussis ldapsearch effectue le dump de l'annuaire.
+
+\subsubsection*{Classe Bkup de File}
+La classe vérifie tout d'abord la validité des options transmis en paramètre de la fonction launch, si ceci sont invalide une erreur est ajouté à la liste des erreurs et on quitte la fonction.
+Les dump sont ensuite archivés si besoin, les dump sont ensuite déplacés dans le répertoire de destination, puis, si la rotation est demandée, les fichiers indésirables sont supprimés.
+
+
+\subsection*{classArchive}
+Effectue les opération de compression et de packaging grâce à la librairie tarfile, il est possible de spécifier si l'on veut on non garder le fichier à archiver après archivage.
+
+\subsection*{classRotate}
+Effectue les opérations de rotation, en utilisant les paramètres qui lui sont donnés, si l'un d'eux est incorrects une erreur est levée
+Pour réaliser la rotation, la classe génère une liste de validité en se basant sur le du fichier qui possèdent tous le même pattern: nom\_annee-mois-jour
+Les fichiers n'étant pas la liste de validité sont supprimé.
+
+
+IV- Mailing
+	Afin d'avertir l'utilisateur de potentielles erreurs durant un run via cron (donc sans stdout d'accessible), un système de mailing à été mis en place.
+
+Remarques:
+Après la fin de l'implémentation, mon maître de stage c'est intérrogé sur la pertinence du paramètres skipdefaultlist, qui même s'il permet décrire moins de configuration, a aussi pour conséquence de perdre l'utilisateur dans les différentes option.
+Il a tout de même été décidé de garder ce paramètre. Cette modification de dernière minute a permis de mettre en lumière les différents problèmes pouvant survenir lors de la modification d'une manière de configurer une application, comme une non rétrocompatibilité potentielle.
+
+\mint{python}|import this|

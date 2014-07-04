@@ -1,0 +1,81 @@
+\definecolor{Code}{rgb}{0,0,0}
+\definecolor{Decorators}{rgb}{0.5,0.5,0.5}
+\definecolor{Numbers}{rgb}{0.5,0,0}
+\definecolor{MatchingBrackets}{rgb}{0.25,0.5,0.5}
+\definecolor{Keywords}{rgb}{0,0,1}
+\definecolor{self}{rgb}{0,0,0}
+\definecolor{Strings}{rgb}{0,0.63,0}
+\definecolor{Comments}{rgb}{0,0.63,1}
+\definecolor{Backquotes}{rgb}{0,0,0}
+\definecolor{Classname}{rgb}{0,0,0}
+\definecolor{FunctionName}{rgb}{0,0,0}
+\definecolor{Operators}{rgb}{0,0,0}
+\definecolor{Background}{rgb}{0.98,0.98,0.98}
+
+
+\lstnewenvironment{python}[1][]{
+\lstset{%
+        inputencoding=utf8,
+        extendedchars=true,
+        literate=%
+        {é}{{\'{e}}}1
+        {è}{{\`{e}}}1
+        {ê}{{\^{e}}}1
+        {ë}{{\¨{e}}}1
+        {É}{{\'{E}}}1
+        {Ê}{{\^{E}}}1
+        {û}{{\^{u}}}1
+        {ù}{{\`{u}}}1
+        {â}{{\^{a}}}1
+        {à}{{\`{a}}}1
+        {á}{{\'{a}}}1
+        {ã}{{\~{a}}}1
+        {Á}{{\'{A}}}1
+        {Â}{{\^{A}}}1
+        {Ã}{{\~{A}}}1
+        {ç}{{\c{c}}}1
+        {Ç}{{\c{C}}}1
+        {õ}{{\~{o}}}1
+        {ó}{{\'{o}}}1
+        {ô}{{\^{o}}}1
+        {Õ}{{\~{O}}}1
+        {Ó}{{\'{O}}}1
+        {Ô}{{\^{O}}}1
+        {î}{{\^{i}}}1
+        {Î}{{\^{I}}}1
+        {í}{{\'{i}}}1
+        {Í}{{\~{Í}}}1
+}
+\lstset{
+numbers=left,
+numberstyle=\footnotesize,
+numbersep=1em,
+xleftmargin=1em,
+framextopmargin=2em,
+framexbottommargin=2em,
+showspaces=false,
+showtabs=false,
+showstringspaces=false,
+frame=l,
+tabsize=4,
+% Basic
+basicstyle=\ttfamily\small\setstretch{1},
+backgroundcolor=\color{Background},
+language=Python,
+% Comments
+commentstyle=\color{Comments}\slshape,
+% Strings
+stringstyle=\color{Strings},
+morecomment=[s][\color{Strings}]{"""}{"""},
+morecomment=[s][\color{Strings}]{'''}{'''},
+% keywords
+morekeywords={import,from,class,def,for,while,if,is,in,elif,else,not,and,or,print,break,continue,return,True,False,None,access,as,,del,except,exec,finally,global,import,lambda,pass,print,raise,try,assert},
+keywordstyle={\color{Keywords}\bfseries},
+% additional keywords
+morekeywords={[2]@invariant},
+keywordstyle={[2]\color{Decorators}\slshape},
+emph={self},
+emphstyle={\color{self}\slshape},
+identifierstyle=\color{Code}
+%
+}}{}

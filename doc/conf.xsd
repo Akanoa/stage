@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="root">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="configurations"/>
+        <xs:element ref="projects"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="configurations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="configuration"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="sockets"/>
+        <xs:choice>
+          <xs:element ref="opts"/>
+          <xs:sequence>
+            <xs:element ref="smtp_opts"/>
+            <xs:element ref="db_opts"/>
+          </xs:sequence>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sockets">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="socket"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="socket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="host"/>
+        <xs:element ref="port"/>
+        <xs:element minOccurs="0" ref="headerSize"/>
+      </xs:sequence>
+      <xs:attribute name="buffer-size" use="required" type="xs:integer"/>
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="headerSize" type="xs:integer"/>
+  <xs:element name="opts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="host"/>
+        <xs:element ref="port"/>
+        <xs:element ref="default-affiliate"/>
+        <xs:element ref="nb-url-path-terms"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="default-affiliate" type="xs:integer"/>
+  <xs:element name="nb-url-path-terms" type="xs:integer"/>
+  <xs:element name="smtp_opts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="user"/>
+        <xs:element ref="password"/>
+        <xs:element ref="server"/>
+        <xs:element ref="port"/>
+        <xs:element ref="mailto"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="password" type="xs:NCName"/>
+  <xs:element name="server" type="xs:NCName"/>
+  <xs:element name="mailto" type="xs:string"/>
+  <xs:element name="db_opts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="host"/>
+        <xs:element ref="port"/>
+        <xs:element ref="user"/>
+        <xs:element ref="passwd"/>
+        <xs:element ref="db"/>
+        <xs:element ref="table"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="passwd" type="xs:anyURI"/>
+  <xs:element name="db" type="xs:NCName"/>
+  <xs:element name="table" type="xs:NCName"/>
+  <xs:element name="projects">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="project"/>
+      </xs:sequence>
+      <xs:attribute name="default-redirection" use="required" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="project">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="redirections"/>
+      </xs:sequence>
+      <xs:attribute name="default-redirection" use="required" type="xs:anyURI"/>
+      <xs:attribute name="disable" type="xs:integer"/>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="redirections">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="redirection"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="redirection">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:anyURI">
+          <xs:attribute name="lang" use="required"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="host" type="xs:NCName"/>
+  <xs:element name="port" type="xs:integer"/>
+  <xs:element name="user" type="xs:string"/>
+</xs:schema>
