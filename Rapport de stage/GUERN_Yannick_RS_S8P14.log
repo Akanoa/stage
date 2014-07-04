@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.6.3)  4 JUL 2014 10:04
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.6.3)  4 JUL 2014 10:55
 entering extended mode
 **GUERN_Yannick_RS_S8P14.tex
 ("D:\DATAS\__docs__\stage\Rapport de stage\GUERN_Yannick_RS_S8P14.tex"
@@ -1032,18 +1032,8 @@ runsystem(del GUERN_Yannick_RS_S8P14.out.pyg)...executed.
 
 runsystem(del GUERN_Yannick_RS_S8P14.pyg)...executed.
 
- [34] [35]
-runsystem(pygmentize -l python -f latex -F tokenmerge             -P "verboptio
-ns= " -o GUERN_Yannick_RS_S8P14.out.pyg GUERN_Yannick_RS_S8P14.pyg)...executed.
-
-
-("D:\DATAS\__docs__\stage\Rapport de stage\GUERN_Yannick_RS_S8P14.out.pyg")
-runsystem(del GUERN_Yannick_RS_S8P14.out.pyg)...executed.
-
-runsystem(del GUERN_Yannick_RS_S8P14.pyg)...executed.
-
-)
-[36] ("D:\DATAS\__docs__\stage\Rapport de stage\includes/concl.tex") [37
+ [34] [35]) [36]
+("D:\DATAS\__docs__\stage\Rapport de stage\includes/concl.tex") [37
 
 
 ]
@@ -1067,16 +1057,22 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 65.
 ("D:\DATAS\__docs__\stage\Rapport de stage\includes/references.aux"))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 65.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 65.
-Package rerunfilecheck Info: File `GUERN_Yannick_RS_S8P14.out' has not changed.
 
-(rerunfilecheck)             Checksum: B4B8818FED48B9FDD63D9EB4909090F9;254.
+
+Package rerunfilecheck Warning: File `GUERN_Yannick_RS_S8P14.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `GUERN_Yannick_RS_S8P14.out':
+(rerunfilecheck)             Before: B4B8818FED48B9FDD63D9EB4909090F9;254
+(rerunfilecheck)             After:  F57A843BDF73503940D943D11461B46B;308.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 65.
  ) 
 Here is how much of TeX's memory you used:
- 11894 strings out of 493921
- 176963 string characters out of 3144874
+ 11890 strings out of 493921
+ 176809 string characters out of 3144874
  401291 words of memory out of 3000000
- 14576 multiletter control sequences out of 15000+200000
+ 14573 multiletter control sequences out of 15000+200000
  21655 words of font info for 46 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  42i,12n,52p,852b,1772s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1107,9 +1103,9 @@ es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files
  (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x8
 6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)
 /MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on GUERN_Yannick_RS_S8P14.pdf (39 pages, 1849040 bytes).
+Output written on GUERN_Yannick_RS_S8P14.pdf (39 pages, 1849104 bytes).
 PDF statistics:
- 1312 PDF objects out of 1440 (max. 8388607)
- 335 named destinations out of 1000 (max. 500000)
+ 1314 PDF objects out of 1440 (max. 8388607)
+ 336 named destinations out of 1000 (max. 500000)
  136 words of extra memory for PDF output out of 10000 (max. 10000000)
 

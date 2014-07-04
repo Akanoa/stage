@@ -289,11 +289,6 @@ Pour réaliser la rotation, la classe génère une liste de validité en se basa
 Les fichiers n'étant pas la liste de validité sont supprimé.
 
 
-IV- Mailing
-	Afin d'avertir l'utilisateur de potentielles erreurs durant un run via cron (donc sans stdout d'accessible), un système de mailing à été mis en place.
+\section{Mailing}
+Afin d'avertir l'utilisateur de potentielles erreurs durant un run via cron (donc sans stdout d'accessible), un système de mailing à été mis en place.
 
-Remarques:
-Après la fin de l'implémentation, mon maître de stage c'est intérrogé sur la pertinence du paramètres skipdefaultlist, qui même s'il permet décrire moins de configuration, a aussi pour conséquence de perdre l'utilisateur dans les différentes option.
-Il a tout de même été décidé de garder ce paramètre. Cette modification de dernière minute a permis de mettre en lumière les différents problèmes pouvant survenir lors de la modification d'une manière de configurer une application, comme une non rétrocompatibilité potentielle.
-
-\mint{python}|import this|
