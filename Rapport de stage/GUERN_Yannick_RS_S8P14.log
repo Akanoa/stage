@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.6.3)  4 JUL 2014 17:25
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.6.3)  4 JUL 2014 17:38
 entering extended mode
 **GUERN_Yannick_RS_S8P14.tex
 ("D:\DATAS\__docs__\stage\Rapport de stage\GUERN_Yannick_RS_S8P14.tex"
@@ -1034,7 +1034,7 @@ runsystem(del GUERN_Yannick_RS_S8P14.pyg)...executed.
 File: images/package_abstract_fs.png Graphic file (type png)
 
 <use images/package_abstract_fs.png>
-Package pdftex.def Info: images/package_abstract_fs.png used on input line 18.
+Package pdftex.def Info: images/package_abstract_fs.png used on input line 22.
 (pdftex.def)             Requested size: 344.64273pt x 218.16832pt.
  [37
 
@@ -1118,7 +1118,7 @@ es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files
  (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x8
 6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)
 /MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on GUERN_Yannick_RS_S8P14.pdf (42 pages, 1906768 bytes).
+Output written on GUERN_Yannick_RS_S8P14.pdf (42 pages, 1906851 bytes).
 PDF statistics:
  1350 PDF objects out of 1440 (max. 8388607)
  353 named destinations out of 1000 (max. 500000)
