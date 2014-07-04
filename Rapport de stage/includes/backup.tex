@@ -214,7 +214,7 @@ Ci dessous un exemple de fichier de configuration valide
 
 \subsection*{Les urls}
 Les urls permettent de spécifier des répertoire d'entrées-sorties, facilement en utilisant le système de schéma qui indique sur quel système de fichier la ressource se trouve, par example une url débutant par ftp://, indique que la ressource est située sur un serveur FTP à l'inverse une ressource dans un système de fichier local débuttera par file://.
-Remarque: si aucun schéma n'est défini, le système considérera la ressource comme locale.
+\underline{Remarque}: si aucun schéma n'est défini, le système considérera la ressource comme locale.
 
 
 \subsection*{La sous-sous-section [[[archive]]]}
@@ -227,7 +227,7 @@ Pour l'instant les seuls modes disponibles, sont:
 \item gz 
 \end{itemize}
 
-\newpage
+
 
 \subsection*{La sous-sous-section [[[rotation]]]}
 Si celle ci est présente, permet d'activer le système de rotation des backups
@@ -248,7 +248,7 @@ Maintenant dans le cas d'une rotation activée:
 \item \textbf{dayofmonth}:jour du mois où la journalistion est effectuée	
 \end{itemize}
 
-Remarques:
+\underline{Remarques}:
 	Si les paramètres de rotation sont en contradiction avec les paramètres max-files et min-files,
 la rotation sera affectée par ces deux paramètres. 
 
@@ -269,7 +269,7 @@ La classe vérifie tout d'abord la validité des options transmis en paramètre 
 Si les options sont valides, la classe tente de se connecter au serveur Mysql, si cela échoue une erreur est renvoyé, si la connexion réussis l'utilitaire mysqldump effectue le dump de toutes les bases de spécifiées.
 Les dump sont ensuite archivés si besoin, les dump sont ensuite déplacés dans le répertoire de destination, puis, si la rotation est demandée, les fichiers indésirables sont supprimés.
 
-\newpage
+
 
 \subsubsection*{Classe Bkup de Ldap}
 La classe vérifie tout d'abord la validité des options transmis en paramètre de la fonction launch, si ceci sont invalide une erreur est ajouté à la liste des erreurs et on quitte la fonction.
@@ -289,6 +289,13 @@ Pour réaliser la rotation, la classe génère une liste de validité en se basa
 Les fichiers n'étant pas la liste de validité sont supprimé.
 
 
-\section{Mailing}
+\section*{Mailing}
 Afin d'avertir l'utilisateur de potentielles erreurs durant un run via cron (donc sans stdout d'accessible), un système de mailing à été mis en place.
 
+
+\section*{Abstraction de la destination}
+Le système d'URL nous permet une relative souplesse quant à la destination des backups, mais cela pose aussi le problème de pouvoir manipuler plusieurs systèmes de fichier indifféremment.
+
+Ceci à poussé à la création d'une librairie réalisant les différentes manipulation voulue, tel que copier sur un FTP des données stockées sur un NTFS et pourquoi pas d'un FTP vers un SSH ou en passant via un web-service en HTTP.
+
+La prochaine section parle plus amplement de cette bibliothèque de fonctions.
