@@ -100,7 +100,20 @@ L'idée première était d'utiliser un objet de type Stream qui aurait fait le b
 Cette piste a vite été abandonnée pour des raisons évidente de consommation de mémoire 
 Le choix c'est donc porté vers une structure producteur-consommateur, afin de réaliser un gain en performance d'utilisation mémoire. Or ceci à un coup en vitesse de transfert entre la source et la destinatination, qui j ele rappelle, peut-être situé entre de la boucle locale.Il a donc valut ajuster la taille des blocs et la taille de la FIFO afin d'obtenir les meilleurs performances possibles.
 
-Ceci gâce à l'utilitaire cProfile de python qui permet de logguer le temps passer dans les les différentes méthodes d'un Thread
+Ceci grâce à l'utilitaire cProfile de python qui permet de comptabiliser le temps passer dans les différentes méthodes d'un Thread.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{images/without_optimization}
+	\caption{Répartion du temps d'éxécution dans le cas d'une FIFO non optimisée}
+\end{figure}
+
 Nous remarquons ici que la méthode get passe énormément de temps à attendre la possibilité de pouvoir ajouter un bloc dans la file d'attente, ceci signifie que le consommateur (put), n'est pas assez rapide dans le dépilage (contrainte réseau, écriture sur le disque, etc...)
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics{images/with_optimization}
+	\caption{Répartion du temps d'éxécution dans le cas d'une FIFO optimisée}
+\end{figure}
 
 Une fois les paramètres de la FIFO optimisée, la totalité du temps est consacrée à la lecture des données, ce qui est le fonctionnement voulu et attendu.

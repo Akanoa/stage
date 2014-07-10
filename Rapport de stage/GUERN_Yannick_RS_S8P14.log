@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.6.3)  4 JUL 2014 17:38
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.6.3)  8 JUL 2014 10:30
 entering extended mode
 **GUERN_Yannick_RS_S8P14.tex
 ("D:\DATAS\__docs__\stage\Rapport de stage\GUERN_Yannick_RS_S8P14.tex"
@@ -818,14 +818,14 @@ Package pdftex.def Info: images/UML_supervision_v2.png used on input line 17.
 <images/url.png, id=68, 729.927pt x 171.842pt>
 File: images/url.png Graphic file (type png)
  <use images/url.png>
-Package pdftex.def Info: images/url.png used on input line 54.
+Package pdftex.def Info: images/url.png used on input line 53.
 (pdftex.def)             Requested size: 364.9626pt x 85.92078pt.
 
 <images/cyavision_config_db.jpg, id=69, 354.57469pt x 186.6975pt>
 File: images/cyavision_config_db.jpg Graphic file (type jpg)
 
 <use images/cyavision_config_db.jpg>
-Package pdftex.def Info: images/cyavision_config_db.jpg used on input line 75.
+Package pdftex.def Info: images/cyavision_config_db.jpg used on input line 74.
 (pdftex.def)             Requested size: 212.74644pt x 112.01935pt.
  [5 <D:/DATAS/__docs__/stage/Rapport de stage/images/url.png> <D:/DATAS/__docs_
 _/stage/Rapport de stage/images/cyavision_config_db.jpg>]
@@ -839,11 +839,11 @@ File: lstmisc.sty 2014/03/04 1.5c (Carsten Heinz)
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 88.
+(Font)              <7> on input line 87.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 88.
+(Font)              <5> on input line 87.
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 88.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 87.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
@@ -860,14 +860,14 @@ File: images/cyavision_module_de_tests.png Graphic file (type png)
 <use images/cyavision_module_de_tests.png>
 Package pdftex.def Info: images/cyavision_module_de_tests.png used on input lin
 e 195.
-(pdftex.def)             Requested size: 68.25378pt x 120.44786pt.
+(pdftex.def)             Requested size: 51.19164pt x 90.33818pt.
  [8 <D:/DATAS/__docs__/stage/Rapport de stage/images/cyavision_module_de_tests.
 png>]
-<images/cyavision_alerts_db.jpg, id=143, 388.45125pt x 82.05656pt>
+<images/cyavision_alerts_db.jpg, id=144, 388.45125pt x 82.05656pt>
 File: images/cyavision_alerts_db.jpg Graphic file (type jpg)
 
 <use images/cyavision_alerts_db.jpg>
-Package pdftex.def Info: images/cyavision_alerts_db.jpg used on input line 218.
+Package pdftex.def Info: images/cyavision_alerts_db.jpg used on input line 219.
 
 (pdftex.def)             Requested size: 155.37773pt x 32.82204pt.
 
@@ -875,35 +875,35 @@ Package pdftex.def Info: images/cyavision_alerts_db.jpg used on input line 218.
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 ) [9 <D:/DATAS/__docs__/stage/Rapport de stage/images/cyavision_alerts_db.jpg>]
 
-<images/treatment.png, id=163, 588.09712pt x 1045.92758pt>
+<images/treatment.png, id=164, 588.09712pt x 1045.92758pt>
 File: images/treatment.png Graphic file (type png)
 
 <use images/treatment.png>
-Package pdftex.def Info: images/treatment.png used on input line 278.
+Package pdftex.def Info: images/treatment.png used on input line 279.
 (pdftex.def)             Requested size: 294.04784pt x 522.96251pt.
  [10 <D:/DATAS/__docs__/stage/Rapport de stage/images/treatment.png>]
 (C:\Users\yguern\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\lstlang1.sty
 File: lstlang1.sty 2014/03/04 1.5c listings language file
 )
-[11] <images/alert_mail_html.jpg, id=213, 175.40532pt x 137.01187pt>
+[11] <images/alert_mail_html.jpg, id=214, 175.40532pt x 137.01187pt>
 File: images/alert_mail_html.jpg Graphic file (type jpg)
 
 <use images/alert_mail_html.jpg>
-Package pdftex.def Info: images/alert_mail_html.jpg used on input line 356.
+Package pdftex.def Info: images/alert_mail_html.jpg used on input line 357.
 (pdftex.def)             Requested size: 175.40488pt x 137.01154pt.
 
-<images/mail_reset_html.jpg, id=214, 333.49594pt x 15.80907pt>
+<images/mail_reset_html.jpg, id=215, 333.49594pt x 15.80907pt>
 File: images/mail_reset_html.jpg Graphic file (type jpg)
 
 <use images/mail_reset_html.jpg>
-Package pdftex.def Info: images/mail_reset_html.jpg used on input line 364.
+Package pdftex.def Info: images/mail_reset_html.jpg used on input line 365.
 (pdftex.def)             Requested size: 333.49512pt x 15.809pt.
 
-<images/alert_mail_plain.jpg, id=215, 246.1697pt x 134.75343pt>
+<images/alert_mail_plain.jpg, id=216, 246.1697pt x 134.75343pt>
 File: images/alert_mail_plain.jpg Graphic file (type jpg)
 
 <use images/alert_mail_plain.jpg>
-Package pdftex.def Info: images/alert_mail_plain.jpg used on input line 373.
+Package pdftex.def Info: images/alert_mail_plain.jpg used on input line 374.
 (pdftex.def)             Requested size: 246.16908pt x 134.7531pt.
  [12 <D:/DATAS/__docs__/stage/Rapport de stage/images/alert_mail_html.jpg> <D:/
 DATAS/__docs__/stage/Rapport de stage/images/mail_reset_html.jpg> <D:/DATAS/__d
@@ -1052,12 +1052,32 @@ runsystem(del GUERN_Yannick_RS_S8P14.out.pyg)...executed.
 
 runsystem(del GUERN_Yannick_RS_S8P14.pyg)...executed.
 
-)
-[39] ("D:\DATAS\__docs__\stage\Rapport de stage\includes/concl.tex") [40
+
+<images/without_optimization.png, id=542, 488.224pt x 429.605pt>
+File: images/without_optimization.png Graphic file (type png)
+
+<use images/without_optimization.png>
+Package pdftex.def Info: images/without_optimization.png used on input line 107
+.
+(pdftex.def)             Requested size: 195.28613pt x 171.83894pt.
+
+<images/with_optimization.png, id=543, 457.71pt x 706.64pt>
+File: images/with_optimization.png Graphic file (type png)
+
+<use images/with_optimization.png>
+Package pdftex.def Info: images/with_optimization.png used on input line 115.
+(pdftex.def)             Requested size: 457.7089pt x 706.63828pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) [39 <D:/DATAS/__docs__/stage/Rapport de stage/images/without_optimization.png
+>] [40 <D:/DATAS/__docs__/stage/Rapport de stage/images/with_optimization.png>]
+("D:\DATAS\__docs__\stage\Rapport de stage\includes/concl.tex") [41
 
 
 ]
-("D:\DATAS\__docs__\stage\Rapport de stage\includes/references.tex") [41
+("D:\DATAS\__docs__\stage\Rapport de stage\includes/references.tex") [42
 
 
 
@@ -1080,14 +1100,14 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 67.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 67.
 Package rerunfilecheck Info: File `GUERN_Yannick_RS_S8P14.out' has not changed.
 
-(rerunfilecheck)             Checksum: 22B1688607AD9AB94A524B48B07A881C;194.
+(rerunfilecheck)             Checksum: F3445106ECDBA3DD6C21D4052B16F2B4;194.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 67.
  ) 
 Here is how much of TeX's memory you used:
- 11923 strings out of 493921
- 177734 string characters out of 3144874
+ 11936 strings out of 493921
+ 178096 string characters out of 3144874
  401752 words of memory out of 3000000
- 14579 multiletter control sequences out of 15000+200000
+ 14587 multiletter control sequences out of 15000+200000
  21655 words of font info for 46 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  42i,12n,52p,852b,1772s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1118,9 +1138,9 @@ es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files
  (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x8
 6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)
 /MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on GUERN_Yannick_RS_S8P14.pdf (42 pages, 1906851 bytes).
+Output written on GUERN_Yannick_RS_S8P14.pdf (43 pages, 2028478 bytes).
 PDF statistics:
- 1350 PDF objects out of 1440 (max. 8388607)
- 353 named destinations out of 1000 (max. 500000)
- 133 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1365 PDF objects out of 1440 (max. 8388607)
+ 356 named destinations out of 1000 (max. 500000)
+ 143 words of extra memory for PDF output out of 10000 (max. 10000000)
 

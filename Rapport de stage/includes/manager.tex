@@ -1,15 +1,15 @@
 \part*{CyaVision}
 
-Ce Module permet de surveiller un groupe de machines. En effectuant une batterie de tests à intervalles périodiques sur plusieurs serveurs.
+Ce Module permet de surveiller un groupe de machines. En effectuant une batterie de tests à intervalles périodiques sur plusieurs serveurs. Et traite les résultats avant de renvoyer par mails les différentes erreurs.
 
 \section*{Structure}
 
-L'application est composé de 3 classes ayant des tâches bien déterminés
+L'application est composée de 3 classes ayant des tâches bien déterminés
 
 \begin{itemize}
-	\item{Config} : son rôle est de récupéré et de traiter la configuration en base de données et si celle-ci est correcte, la mettre en forme avant de la transmettre à l'application principale. 
-	\item{Supervisor} : est l'interface publique de l'application, elle permet de lancer les tests désirés.
-	\item{Treatment} : traite les résultats provenant de la classe Supervisor et en cas de problème envoie un mail soit au sysadmin soit à la personne responsable du projet posant problème. 
+	\item \textbf{Config} : son rôle est de récupérer et de traiter la configuration en base de données et si celle-ci est correcte, la mettre en forme avant de la transmettre à l'application principale. 
+	\item \textbf{Supervisor} : est l'interface publique de l'application, elle permet de lancer les tests désirés.
+	\item \textbf{Treatment} : traite les résultats provenant de la classe Supervisor et en cas de problèmes, envoie un mail soit au sysadmin soit à la personne responsable du projet posant problème. 
 \end{itemize}
 
 \begin{figure}[h!]
@@ -18,13 +18,12 @@ L'application est composé de 3 classes ayant des tâches bien déterminés
 	\caption{Diagramme de classe de l'application}
 \end{figure}
 
-Ce package intègre aussi différentes classes de tests déjà existantes qui réalise les opérations sur les serveurs.
-Elles sont pour le moment au nombre de 3:
+Ce package intègre aussi différentes classes de tests déjà existantes qui réalise les opérations sur les serveurs:
 
 \begin{itemize}
-	\item{MySQL} : comme son l'indique cette classe réalise des tests sur les serveurs MySQL, généralement sur port 3306.
-	\item{PyLobby} : celui ci permet d'effectuer des tests sur n'importe quel port et donc n'importe quel protocole.
-	\item{Relay} : permet d'opérer sur un protocole interne 
+	\item \textbf{MySQL} : comme son nom l'indique cette classe réalise des tests sur les serveurs MySQL, le plus généralement sur port 3306.
+	\item \textbf{PyLobby} : celui-ci permet d'effectuer des tests sur n'importe quel port et donc n'importe quel protocole.
+	\item \textbf{Relay} : permet d'opérer sur un protocole interne 
 \end{itemize}
 
 \underline{Remarque}:
@@ -42,7 +41,7 @@ L'application se compose aussi de deux tables MySQL:
 
 \section*{Classe Config}
 
-Cette classe réalise plusieurs opération avant d'obtenir et de renvoyer une configuration correcte à la classe Supervisor, cette dernière lui transmet en paramètre de construction une URL de connexion à une BDD.
+Cette classe réalise plusieurs opérations avant d'obtenir et de renvoyer une configuration correcte à la classe Supervisor, cette dernière lui transmet en paramètre de construction une URL de connexion à une BDD.
 
 \subsection*{Connexion à la BDD}
 
@@ -56,19 +55,19 @@ La première opération consiste à vérifier le format de l'URL transmise. Pour
 \end{figure}
 
 
-La transformation de l'url en paramètres de connexion est réalisé via le module urlparse, qui permet à partir d'une chaîne de caractère de récupérer les différents éléments constituant une URL.
+La transformation de l'url en paramètres de connexion est réalisée via le module urlparse de python, qui permet à partir d'une chaîne de caractères de récupérer les différents éléments constitutifs une URL.
 
-Pour que l'URL soi valide dans notre cas il faut que celle-ci possède un schéma égal à "mysql", sinon on retourne false.
+Pour que l'URL soit valide. Il faut dans notre cas, que celle-ci possède un schéma égal à "mysql", sinon la méthode de connexion retourne False.
 
-Ensuite l'URL possède obligatoirement un nom d'utilisateur, un mot de passe et une adresse de connexion. Si l'un de ces paramètres est inexistant,  l'url est considérée comme erronée et on retourne là aussi False.
+Ensuite l'URL possède obligatoirement un nom d'utilisateur, un mot de passe ainsi qu'une adresse de connexion. Si l'un de ces paramètres est inexistant,  l'url est considérée comme erronée et on retourne là aussi False.
 
-Si tous les tests réussissent, on tente de se connecter, si la connexion échoue pour quelques raisons que ce soit on retourrne False. Autrement on renvoie True.
+Si tous les tests réussissent, on tente de se connecter, si la connexion échoue pour quelques raisons que ce soit on retourne False. Autrement on renvoie True.
 
 
 \subsection*{Récupéation de la configuration}
 Si la connexion à la BDD est une réussite, on peut récupérer la configuration qui y est stockée.
 
-La configuration se trouve dans la BDD sous la forme d'une table ayant par exemple cette forme:
+La configuration se trouve dans une BDD sous la forme d'une table ayant cette forme:
 
 \begin{figure}[h!]
 	\centering
@@ -80,9 +79,9 @@ La configuration se trouve dans la BDD sous la forme d'une table ayant par exemp
 
 \subsection*{Extraction de la configuration}
 
-Pour chaque ligne de la configuration on vérifie la section concerné si c'est la section "general" ou si la directive correspond à "emails" alors on ne fait que rajouter la clef "directive" est son contenu au dictionnaire de la "section". 
+Pour chaque ligne de la configuration on vérifie la section concernée s'il s'agit de la section "general" ou si la directive correspond à "emails" alors on rajoute la clef "directive" et son contenu au dictionnaire de la "section". 
 
-Par exemple si la section est général et la directive "antispam\_delay" et la valeur associée est 3600 alors:
+Par exemple si la section appartient à la configuration générale et que la directive est "antispam\_delay" ayant pour valeur associée 3600 alors:
 
 \begin{python}
 >>>print config
@@ -114,15 +113,15 @@ De même si l'on trouve une directive "emails" dans la section "projet1" avec la
 }
 \end{python}
 
-Bien entendu le nom des sections est généré au fur et à mesure que l'on en rencontre de nouvelles.
+Le nom des sections est généré au fur et à mesure que l'on en rencontre de nouvelles.
 
-Si le nom de la section est différentes est différent de "general" ou que la directive n'est pas "emails" alors il s'agit de l'url d'un test il faut donc l'ajouter au dictionnaire de tests du projet.
+Si le nom de la section est différent de "general" ou que la directive n'est pas "emails" alors il s'agit de l'URL d'un test, il faut donc l'ajouter au dictionnaire de tests du projet.
 
-Par exemple, le projet1 possède une url de test "test1" de valeur "scheme://serveur.test"
+Par exemple, le "projet1" possède une URL de test "test1" de valeur "scheme://serveur.test"
 
-Avant d'être ajouté au dictionnaire chaque url de test est vérifié pour s'assurer que celle-ci contient bien un schéma nécessaire à la suite des opérations. Si ce n'est pas le cas une erreur est revoyée.
+Avant d'être ajoutée au dictionnaire chaque URL de test est vérifiée pour s'assurer que celle-ci contient bien un schéma nécessaire à la suite des opérations. Si ce n'est pas le cas une erreur est renvoyée.
 
-Si c'est bien le cas on découpe l'url au niveau du séparateur "://" et on récupère le schéma
+Autrement, on découpe l'URL au niveau du séparateur "://" et on récupère le schéma, avant de l'ajouter dans une liste afin de pouvoir l'utiliser plus facilement ultérieurement.
 
 \begin{python}
 >>>print config
@@ -139,22 +138,24 @@ Si c'est bien le cas on découpe l'url au niveau du séparateur "://" et on réc
 }
 \end{python}
 
-Si la clef "tests", n'existe pas déjà dans le projet alors elle est crée.
+Si la clef "tests", n'existe pas encore dans le projet alors elle est crée.
 
 
 \subsection*{Validation de la configuration}
 
-Cette configuration est ensuite validée selon plusieurs critères, il faut tout d'abord que les directives :
+Cette configuration est ensuite validée selon plusieurs critères.
+
+Il faut tout d'abord l'ensemble des directives suivantes existent:
 
 \begin{itemize}
-	\item{antispam\_delay} : défini le temps entre deux rappel par mail des erreurs qui ont pu apparaître sur les projets. 
-	\item{tpl\_delimiter} : permet de réaliser les délimitation dans les templates de mails 
-	\item{admin\_email} : adresse mail à qui envoyer un mail en cas de crash du script
-	\item{tpl\_html} : template de mail au format html
-	\item{tpl\_plain} : template de mail au format plain text
+	\item \textbf{antispam\_delay} : défini le temps entre deux rappels par mail des erreurs qui ont pu apparaître sur les projets. 
+	\item \textbf{tpl\_delimiter} : permet de définir la chaîne de caractères de délimitation dans les templates de mails 
+	\item \textbf{admin\_email} : adresse mail de la personne responsable du script.
+	\item \textbf{tpl\_html} : template du mail d'alerte au format html
+	\item \textbf{tpl\_plain} : template du mail d'alerte au format plain text
 \end{itemize}
 
-En plus de devoir exister ces directives doivent aussi ne pas être vides.
+De plus la colonne "content" des ces directives ne peuvent pas être vides.
 
 Chaque projet doit aussi posséder une directive "emails", afin de pouvoir contacter le ou les chefs de projets en cas d'échecs de tests sur leur serveur.
 
@@ -167,14 +168,13 @@ La méthode principale de cette classe est "launch", elle réalise de nombreuses
 
 De vérifier que la connexion avec la BDD est correcte.
 
-De lancer des tests spécifiques s'ils sont passés en paramètres de lancement, autrement l'ensemble des tests de la bases de données sont lancés. Et d'en générer un jeu de tests.
+De lancer les tests spécifiques s'ils sont passés en paramètres de lancement, ou par défaut l'ensemble des tests de la bases de données.
 
-Si l'utilisateur à déclarer vouloir vider la table des alertes avant de lancer les tests.
+Si l'utilisateur à déclarer vouloir vider la table des alertes avant de lancer les tests, effectuer cette tâche.
 
-Ensuite pour tous les projets possédants un jeu de tests, on réalise chacun son tour le test, si celui-ci échoue on réessaie un autre fois, chaque résultat est stocké dans une structure de données
+Ensuite pour tous les projets possédants un jeu de tests, on réalise les opérations, pour chacun d'eux: si le test réussis on enregistre le résultat, si le test échoue, on essaie une deuxième fois, ceci permet de gommer les erreurs temporaires, telle que celle de la latence sur le réseau qui peuvent occasionner des faux-négatifs. S'il y a un deuxième résultat négatif, le test est considéré comme non-concluant, on enregistre le résultat.
 
-
-Ayant la forme:
+La structure de sauvegarde des résultats ressemble à ceci:
 \begin{python}
 test_results = [
 	["url_test1", True, "libellé du test1"],
@@ -184,34 +184,35 @@ test_results = [
 
 Le deuxième paramètre étant le résultat du test.
 
-Si le test spécifié par l'utilisateur n'existe pas dans la base de données alors un message d'erreur le signal à l'utilisateur et l'on passe au test suivant.
+Si le test spécifié par l'utilisateur n'existe pas dans la base de données alors un message d'erreur le lui signale et l'on passe au test suivant.
 
 \subsection*{Le déroulement d'un test}
 
-La structure d'un module de test est composé de deux classes, une classe spécifique qui contient les différents jeu de test pour le protocole et une classe wrapper possédant le nom Supervise héritant de la classe spécifique, celle ci possédant elle même:
+Un module de test est composée de deux classes, une classe spécifique qui contient les différents jeux de tests du protocole ainsi qu'une classe \textit{wrapper} possédant le nom Supervise et héritant de la classe spécifique.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.4]{images/cyavision_module_de_tests.png}
+	\includegraphics[scale=0.3]{images/cyavision_module_de_tests.png}
 	\caption{Structure d'un module de test}
 \end{figure}
 
+La classe de test ayant:
 \begin{itemize}
-\item  une méthode \_verify qui permet de s'assurer de la validité des informations transmises par l'url de test.
-\item une méthode launch qui réalise le lancement des jeux  de tests et renvoie le résultat de ceux-ci sous forme d'une liste de string, représentant le nom des tests ayant échoués.
+\item  une méthode \textbf{\_verify} qui permet de s'assurer de la validité des informations transmises par l'url de test.
+\item une méthode \textbf{launch} qui réalise le lancement des jeux  de tests et renvoie le résultat de ceux-ci sous forme d'une liste de string, représentant le nom des tests ayant échoués.
 \end{itemize}
 
-Une URL peut-être composée de paramètres ce qui nous assure une souplesse totale quand aux options transmis lors des tests, toujours dans une optique de extensibilité de l'application.
+Une URL peut contenir des paramètres ce qui nous assure de la souplesse quant au développement des classes de tests et leur extensibilité.
 
-Chaque module porte le même nom que le schéma de l'URL de test, il est donc aisé d'importer la bonne classe Supervise et de lancer la méthode "launch" de celle-ci.
+Chaque module porte le même nom que le schéma de l'URL de test, il est donc aisé d'importer la bonne classe \textit{Supervise} et de lancer la méthode "launch" de celle-ci.
 
-Pour cela nous utilisaons le module importlib de python. Qui permet de récupérer le module correspondant au schéma de test.
+Pour cela nous utilisons le module \textit{importlib} de python. Qui permet de récupérer le module correspondant au schéma de test désiré.
 
 \newpage
 
-\subsection*{Réinitialisation des alertes}
+\subsection*{Ré-initialisation des alertes}
 
-Voici un exemple de contenu de la table d'alerts:
+Voici un exemple de contenu de la table d'\textit{alerts}:
 
 \begin{figure}[h!]
 	\centering
@@ -219,11 +220,11 @@ Voici un exemple de contenu de la table d'alerts:
 	\caption{Table d'alertes}
 \end{figure}
 
-Tout projet ayant subit un échec lors de l'un des tests se retrouve en état d'erreur et renvoie périodiquement un mail pour soit signaler qu'un problème existe soit que le problème est survenu postérieurement mais qu'il est résolu désormais. 
+Tout projet subissant un échec lors de l'un des tests se retrouve en état d'erreur et envoie périodiquement un mail pour soit signaler qu'un problème existe soit que le problème est survenu postérieurement mais qu'il est résolu désormais. 
 
 Il faut donc un mécanisme permettant de supprimer manuellement les alertes des tests n'ayant plus d'importances.
 
-Ceci est réalisé en ligne de commande en spécifiant quel projet nous désirons réinitialiser l'alerte.
+Ceci est réalisé en ligne de commande en spécifiant le projet devant être réinitialisé.
 
 Pour cela nous supprimons toutes les entrées de la table d'alertes possédant le projet qui doit être réinitialisés. 
 
